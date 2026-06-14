@@ -1,0 +1,312 @@
+.app-shell {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.app-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 0 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-header h1,
+.section-heading h2,
+.portal-panel h3,
+.triage-card h3,
+.starter-notes h3 {
+  margin: 0;
+  color: var(--text-strong);
+}
+
+.app-header h1 {
+  margin-top: 4px;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.eyebrow,
+.panel-label,
+.metric-label,
+.customer-role {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 210px;
+}
+
+.header-meta span,
+.card-header span {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 8px 10px;
+}
+
+.workspace-band,
+.triage-workspace {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin-top: 4px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.section-heading p {
+  max-width: 560px;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.customer-grid,
+.panel-grid,
+.triage-board {
+  display: grid;
+  gap: 14px;
+}
+
+.customer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.customer-card {
+  min-height: 176px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.customer-card:hover,
+.customer-card[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: var(--surface-accent);
+  box-shadow: 0 10px 24px rgb(15 23 42 / 8%);
+}
+
+.customer-card:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.customer-card strong,
+.customer-card span {
+  display: block;
+}
+
+.customer-card strong {
+  margin: 16px 0 6px;
+  color: var(--text-strong);
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.customer-card span:not(.customer-role):not(.customer-priority) {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.customer-priority {
+  margin-top: 18px;
+  color: var(--accent-strong);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.summary-strip {
+  display: grid;
+  grid-template-columns: 1.1fr 0.6fr 1.4fr;
+  gap: 1px;
+  margin: 18px 0 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--border);
+}
+
+.summary-strip div {
+  min-width: 0;
+  padding: 16px;
+  background: var(--surface);
+}
+
+.summary-strip strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-strong);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.panel-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.portal-panel,
+.triage-card,
+.starter-notes {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.portal-panel {
+  min-height: 168px;
+  padding: 18px;
+}
+
+.portal-panel h3 {
+  margin-top: 18px;
+  font-size: 20px;
+  line-height: 1.25;
+}
+
+.portal-panel p,
+.triage-card p,
+.starter-notes li {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.portal-panel p {
+  margin-top: 12px;
+}
+
+.triage-workspace {
+  border-bottom: 0;
+}
+
+.triage-layout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.starter-notes {
+  padding: 18px;
+}
+
+.starter-notes h3 {
+  font-size: 18px;
+}
+
+.starter-notes ul {
+  display: grid;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding-left: 18px;
+}
+
+.triage-board {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.triage-card {
+  min-height: 236px;
+  padding: 18px;
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.card-header h3 {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.triage-card p {
+  margin: 16px 0 18px;
+}
+
+.placeholder-box {
+  display: grid;
+  min-height: 86px;
+  place-items: center;
+  border: 1px dashed var(--border-strong);
+  border-radius: 6px;
+  background: var(--surface-subtle);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 920px) {
+  .app-header,
+  .section-heading {
+    display: grid;
+  }
+
+  .header-meta {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+
+  .customer-grid,
+  .panel-grid,
+  .triage-layout,
+  .triage-board,
+  .summary-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: min(100% - 20px, 1180px);
+    padding-top: 12px;
+  }
+
+  .app-header h1 {
+    font-size: 30px;
+  }
+
+  .customer-card,
+  .portal-panel,
+  .triage-card,
+  .starter-notes {
+    padding: 16px;
+  }
+}
