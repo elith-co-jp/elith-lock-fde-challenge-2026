@@ -1,5 +1,8 @@
-import { useMemo, useState } from 'react'
-import { customers, primaryCustomer } from './data'
+import { useEffect, useState } from 'react'
+import {
+  customers as fallbackCustomers,
+  primaryCustomer as fallbackPrimaryCustomer,
+} from './data'
 import type { CustomerCase, CustomerId } from './types'
 import './App.css'
 
@@ -9,11 +12,11 @@ type PanelItem = {
   note: string
 }
 
-const portalPanels: PanelItem[] = [
+const productPanels: PanelItem[] = [
   {
     label: 'Assistant / Search',
     value: '資料検索・質問回答',
-    note: '既存ポータルには、社内資料や業務ルールを検索し、回答案を作る基本機能があります。',
+    note: '既存プロダクトには、社内資料や業務ルールを検索し、回答案を作る基本機能があります。',
   },
   {
     label: 'Feedback / Signals',
@@ -32,7 +35,7 @@ const workspaceSteps = [
     title: '1. 東雲向け改善',
     status: 'Required',
     description:
-      '東雲ビジネスサポートの業務課題を1つ選び、既存ポータル上の改善として実装してください。',
+      '東雲ビジネスサポートの業務課題を1つ選び、業務支援AI上の改善として実装してください。',
   },
   {
     title: '2. 共通化判断',
@@ -55,16 +58,69 @@ function roleLabel(customer: CustomerCase) {
 }
 
 function App() {
+  const [customers, setCustomers] = useState<CustomerCase[]>(fallbackCustomers)
   const [selectedCustomerId, setSelectedCustomerId] = useState<CustomerId>(
-    primaryCustomer?.id ?? customers[0].id,
+    fallbackPrimaryCustomer?.id ?? fallbackCustomers[0].id,
+  )
+  const [selectedCustomer, setSelectedCustomer] = useState<CustomerCase>(
+    fallbackPrimaryCustomer ?? fallbackCustomers[0],
   )
 
-  const selectedCustomer = useMemo(
-    () =>
-      customers.find((customer) => customer.id === selectedCustomerId) ??
-      customers[0],
-    [selectedCustomerId],
-  )
+  useEffect(() => {
+    let shouldUpdate = true
+
+    async function loadCustomers() {
+      const response = await fetch('/api/customers')
+
+      if (!response.ok) {
+        throw new Error(`Failed to load customers: ${response.status}`)
+      }
+
+      const apiCustomers = (await response.json()) as CustomerCase[]
+
+      if (shouldUpdate) {
+        setCustomers(apiCustomers)
+      }
+    }
+
+    loadCustomers().catch((error: unknown) => {
+      console.error(error)
+    })
+
+    return () => {
+      shouldUpdate = false
+    }
+  }, [])
+
+  useEffect(() => {
+    let shouldUpdate = true
+
+    async function loadSelectedCustomer() {
+      const response = await fetch(`/api/customers/${selectedCustomerId}`)
+
+      if (!response.ok) {
+        throw new Error(`Failed to load customer: ${response.status}`)
+      }
+
+      const apiCustomer = (await response.json()) as CustomerCase
+
+      if (shouldUpdate) {
+        setSelectedCustomer(apiCustomer)
+      }
+    }
+
+    loadSelectedCustomer().catch((error: unknown) => {
+      console.error(error)
+      const fallbackCustomer =
+        customers.find((customer) => customer.id === selectedCustomerId) ??
+        fallbackCustomers[0]
+      setSelectedCustomer(fallbackCustomer)
+    })
+
+    return () => {
+      shouldUpdate = false
+    }
+  }, [customers, selectedCustomerId])
 
   const selectedHighPriority = selectedCustomer.workflowOpportunities.filter(
     (opportunity) => opportunity.priority === 'high',
@@ -74,7 +130,7 @@ function App() {
     <main className="app-shell">
       <header className="app-header">
         <div>
-          <p className="eyebrow">AI業務支援ポータル</p>
+          <p className="eyebrow">業務支援AI</p>
           <h1>ELITH LOCK: FDE Challenge Starter</h1>
         </div>
         <div className="header-meta" aria-label="Starter repository status">
@@ -91,13 +147,13 @@ function App() {
           </div>
           <p>
             東雲専用の新規プロダクトをゼロから作る課題ではありません。
-            既存ポータルに対して、顧客価値と共通化の両方を考えた改善を入れてください。
+            既存プロダクトに対して、顧客価値と共通化の両方を考えた改善を入れてください。
           </p>
         </div>
 
         <div className="panel-grid">
-          {portalPanels.map((panel) => (
-            <article className="portal-panel" key={panel.label}>
+          {productPanels.map((panel) => (
+            <article className="product-panel" key={panel.label}>
               <span className="panel-label">{panel.label}</span>
               <h3>{panel.value}</h3>
               <p>{panel.note}</p>
@@ -162,10 +218,10 @@ function App() {
         </div>
 
         <div className="triage-layout">
-          <aside className="starter-notes" aria-label="Portal goals">
-            <h3>Portal goals</h3>
+          <aside className="starter-notes" aria-label="Product goals">
+            <h3>Product goals</h3>
             <ul>
-              {selectedCustomer.portalGoals.map((goal) => (
+              {selectedCustomer.productGoals.map((goal) => (
                 <li key={goal}>{goal}</li>
               ))}
             </ul>

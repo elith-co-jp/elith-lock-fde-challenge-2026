@@ -15,7 +15,7 @@
 
 .app-header h1,
 .section-heading h2,
-.portal-panel h3,
+.product-panel h3,
 .triage-card h3,
 .starter-notes h3 {
   margin: 0;
@@ -179,7 +179,7 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.portal-panel,
+.product-panel,
 .triage-card,
 .starter-notes {
   border: 1px solid var(--border);
@@ -187,25 +187,25 @@
   background: var(--surface);
 }
 
-.portal-panel {
+.product-panel {
   min-height: 168px;
   padding: 18px;
 }
 
-.portal-panel h3 {
+.product-panel h3 {
   margin-top: 18px;
   font-size: 20px;
   line-height: 1.25;
 }
 
-.portal-panel p,
+.product-panel p,
 .triage-card p,
 .starter-notes li {
   color: var(--text-muted);
   font-size: 14px;
 }
 
-.portal-panel p {
+.product-panel p {
   margin-top: 12px;
 }
 
@@ -304,7 +304,7 @@
   }
 
   .customer-card,
-  .portal-panel,
+  .product-panel,
   .triage-card,
   .starter-notes {
     padding: 16px;

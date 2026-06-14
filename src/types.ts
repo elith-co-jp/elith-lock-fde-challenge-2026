@@ -2,7 +2,7 @@ export type CustomerId = 'shinonome' | 'minato' | 'aoba'
 
 export type CustomerPriority = 'high' | 'medium' | 'low'
 
-export type PortalModule =
+export type ProductModule =
   | 'knowledge-search'
   | 'workflow-drafting'
   | 'approval-assist'
@@ -45,7 +45,7 @@ export interface DocumentCategory {
 export interface WorkflowOpportunity {
   id: string
   title: string
-  module: PortalModule
+  module: ProductModule
   priority: CustomerPriority
   userRole: string
   currentProcess: string
@@ -61,7 +61,7 @@ export interface CustomerCase {
   employeeCount: number
   summary: string
   implementationRole: 'primary-target' | 'reference'
-  portalGoals: string[]
+  productGoals: string[]
   departments: Department[]
   documentCategories: DocumentCategory[]
   businessRules: BusinessRule[]

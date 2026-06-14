@@ -6,13 +6,24 @@ The goal is to show how you think and build as an FDE: understand a concrete cus
 
 ## Scenario
 
-ELITH already has an existing product called **AI業務支援ポータル**. It is a configurable portal for companies that want to use AI in daily operations, such as internal Q&A, document search, workflow drafting, approval support, and business-rule guidance.
+ELITH already has an existing product called **業務支援AI**. In this challenge, the starter app represents one workspace inside that product: a configurable customer-facing surface for internal Q&A, document search, workflow drafting, approval support, and business-rule guidance.
 
 This challenge is **not** asking you to build a customer-specific product from scratch. You are joining an existing product team and improving the product through one customer implementation.
 
 Your main target customer is **東雲ビジネスサポート**. Two reference customers are included so you can judge what should stay customer-specific and what should become common product capability.
 
 Think of this as FDE work, not a one-off contracted delivery. A good submission should solve a real slice for the primary customer while leaving the product easier to reuse for the next similar customer. If a feature only works because it hard-codes Shinonome-specific wording, thresholds, or workflows, explain why that is intentional; if the pattern appears across customers, make the reusable part explicit.
+
+## Product Boundary
+
+To avoid ambiguity:
+
+- Existing product: **業務支援AI**.
+- Starter app: a simplified workspace inside 業務支援AI for this challenge.
+- Mock API: a minimal local backend that exposes the starter customer data.
+- Main customer: 東雲ビジネスサポート, which is using 業務支援AI and needs a more useful workflow.
+- What you build: a product improvement inside 業務支援AI for one Shinonome workflow, plus any reusable foundation that also makes sense for the reference customers.
+- What you do not build: a separate Shinonome-only delivery app, a generic consulting deck, or an internal tool for running this challenge.
 
 ## Assignment
 
@@ -94,7 +105,17 @@ Optional local environment variables can be copied from `.env.example`:
 cp .env.example .env.local
 ```
 
-The starter is intentionally small. You can use local/static data only; no backend is required.
+`npm run dev` starts both the Vite frontend and a minimal mock API.
+
+The mock API is intentionally small:
+
+- `GET /api/health`
+- `GET /api/customers`
+- `GET /api/customers/:id`
+
+Use it as the existing product backend scaffold. You may extend it, replace it, or keep using static/local data if that better fits your chosen slice, but explain the choice in your FDE Decision Memo.
+
+Do not spend time building a production database, authentication, SSO, or a full RAG system unless it directly supports your chosen slice.
 
 ## Suggested Implementation Scope
 
@@ -110,4 +131,4 @@ Recommended directions:
 
 Depth and clarity matter more than breadth.
 
-Do not spend your time building authentication, SSO, a production backend, or a full RAG system unless it directly supports your chosen slice. Local/static data is enough for this challenge.
+Do not spend your time building authentication, SSO, a production backend, or a full RAG system unless it directly supports your chosen slice. The provided mock API is enough as a starting backend for this challenge.

@@ -7,10 +7,10 @@ export const customers: CustomerCase[] = [
     industry: '中堅企業向けBPO・経理代行',
     employeeCount: 420,
     summary:
-      '請求書処理、契約書一次確認、問い合わせ一次対応を複数顧客向けに代行している。属人化した判断と確認漏れを減らし、AI業務支援ポータルを現場で使える形にしたい。',
+      '請求書処理、契約書一次確認、問い合わせ一次対応を複数顧客向けに代行している。属人化した判断と確認漏れを減らし、業務支援AIを現場で使える形にしたい。',
     implementationRole: 'primary-target',
-    portalGoals: [
-      '請求書・契約書・問い合わせ対応の判断基準をポータル上で確認できる',
+    productGoals: [
+      '請求書・契約書・問い合わせ対応の判断基準を業務支援AI上で確認できる',
       '部門ごとの優先AIワークフローを見える化する',
       '顧客別ルールと共通ルールを分けて管理できる',
       'AIの提案結果に人間レビューが必要な理由を明示する',
@@ -150,7 +150,7 @@ export const customers: CustomerCase[] = [
         desiredOutcome:
           '問い合わせ分類と顧客重要度に応じて回答案とエスカレーション要否を提示する。',
         candidateSlice:
-          '回答方針、SLA、重要顧客フラグをポータル設定として表現する。',
+          '回答方針、SLA、重要顧客フラグを顧客別設定として表現する。',
         commonizationSignal:
           'サポート返信の文面は顧客別だが、分類・SLA・人間確認の構造は共通化しやすい。',
       },
@@ -169,9 +169,9 @@ export const customers: CustomerCase[] = [
     summary:
       '製造現場と品質保証部門で、作業標準書、検査記録、不具合報告を横断検索したい。',
     implementationRole: 'reference',
-    portalGoals: [
+    productGoals: [
       '品質不具合の一次調査を速くする',
-      '標準書と検査記録を同じポータルで検索する',
+      '標準書と検査記録を同じプロダクト上で検索する',
       '重大不具合は人間レビューを必須にする',
     ],
     departments: [
@@ -250,7 +250,7 @@ export const customers: CustomerCase[] = [
     summary:
       '複数クリニックで院内規程、患者問い合わせ、予約変更ルールを統一的に確認したい。',
     implementationRole: 'reference',
-    portalGoals: [
+    productGoals: [
       '受付スタッフが院内ルールをすぐ確認できる',
       '医療判断をAIに任せず、事務手続きに限定する',
       '患者情報を扱う可能性がある操作は注意表示する',
